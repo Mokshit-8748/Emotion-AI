@@ -419,14 +419,14 @@ with st.sidebar:
         st.session_state["last_dataset_paths"] = dataset_signature
         st.session_state["eval_results"] = None
 
+    model, model_err = load_ser_model(model_path)
+
     model_exists = os.path.exists(model_path)
     st.markdown(
         f"<span style='color:{'#68d391' if model_exists else '#fc8181'};font-size:11px;font-family:monospace;'>"
         f"{'✅' if model_exists else '❌'} {'checkpoint ready' if model_exists else 'checkpoint missing'}</span>",
         unsafe_allow_html=True,
     )
-
-    model, model_err = load_ser_model(model_path)
 
     st.markdown("---")
     st.markdown("<div class='section-title'>System Status</div>", unsafe_allow_html=True)
