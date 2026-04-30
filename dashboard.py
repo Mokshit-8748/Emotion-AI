@@ -197,6 +197,12 @@ st.markdown(
         border-radius: 10px !important;
     }
 
+    /* Force hand cursor on select models dropdown */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"], 
+    div[data-testid="stSelectbox"] input {
+        cursor: pointer !important;
+    }
+
     .stButton > button {
         border-radius: 10px !important;
         font-weight: 700 !important;
