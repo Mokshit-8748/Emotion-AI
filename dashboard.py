@@ -251,6 +251,10 @@ DASHBOARD_MODEL_OPTIONS = {
 @st.cache_resource(show_spinner="Loading model...")
 def load_ser_model(path):
     try:
+        if not os.path.exists(path):
+            if not _download_if_missing(path):
+                return None, f"Model not found at `{path}`"
+
         if path.lower().endswith(".pt"):
             from src.wavlm_runtime import load_wavlm_runtime
 
