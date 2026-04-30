@@ -1,0 +1,31 @@
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Streamlit / notebook / local app state
+.streamlit/
+.ipynb_checkpoints/
+
+# Large local datasets and derived caches
+data/
+*.npz
+*.npy
+*.h5
+
+# Model artifacts
+models/*.h5
+models/*.keras
+models/*.pt
+models/*.pkl
+models/*.json
+models/legacy/
+
+# Logs and scratch outputs
+logs/
+tmp/
+legacy/tmp/
+train_log.txt
+
