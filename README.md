@@ -5,6 +5,7 @@ colorFrom: blue
 colorTo: indigo
 sdk: streamlit
 sdk_version: 1.31.1
+python_version: 3.10
 app_file: dashboard.py
 pinned: false
 ---
