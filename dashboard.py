@@ -232,7 +232,8 @@ def _download_if_missing(path):
             hf_hub_download(
                 repo_id=repo_id,
                 filename=os.path.basename(path),
-                local_dir=os.path.dirname(path)
+                local_dir=os.path.dirname(path),
+                token=os.environ.get("HF_TOKEN")
             )
             return True
         except Exception as e:
