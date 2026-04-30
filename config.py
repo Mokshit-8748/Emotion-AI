@@ -34,11 +34,14 @@ MODEL_PATH_GAN      = os.path.join(MODELS_DIR, "emotion_ser_model_gan.h5")
 MODEL_PATH_FINETUNE = os.path.join(LEGACY_MODELS_DIR, "emotion_wavlm_finetuned.pt")
 MODEL_PATH_FINETUNE_3DATASET = os.path.join(LEGACY_MODELS_DIR, "emotion_wavlm_finetuned_3dataset.pt")
 MODEL_PATH_FINETUNE_3DATASET_V2 = os.path.join(MODELS_DIR, "emotion_wavlm_finetuned_3dataset_v2.pt")
-MODEL_PATH_FINETUNE_DASHBOARD = (
-    MODEL_PATH_FINETUNE_3DATASET_V2
-    if os.path.exists(MODEL_PATH_FINETUNE_3DATASET_V2)
-    else (MODEL_PATH_FINETUNE_3DATASET if os.path.exists(MODEL_PATH_FINETUNE_3DATASET) else MODEL_PATH_FINETUNE)
-)
+if os.environ.get("HF_MODEL_REPO"):
+    MODEL_PATH_FINETUNE_DASHBOARD = MODEL_PATH_FINETUNE_3DATASET_V2
+else:
+    MODEL_PATH_FINETUNE_DASHBOARD = (
+        MODEL_PATH_FINETUNE_3DATASET_V2
+        if os.path.exists(MODEL_PATH_FINETUNE_3DATASET_V2)
+        else (MODEL_PATH_FINETUNE_3DATASET if os.path.exists(MODEL_PATH_FINETUNE_3DATASET) else MODEL_PATH_FINETUNE)
+    )
 SCALER_PATH         = os.path.join(MODELS_DIR, "scaler.pkl")
 ENCODER_PATH        = os.path.join(MODELS_DIR, "label_encoder.pkl")
 GAN_GENERATOR_BEST  = os.path.join(MODELS_DIR, "gan_generator_best.h5")

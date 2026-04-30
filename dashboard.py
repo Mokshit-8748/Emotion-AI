@@ -224,10 +224,27 @@ def _is_dashboard_compatible_model(path):
     )
 
 
+def _download_if_missing(path):
+    repo_id = os.environ.get("HF_MODEL_REPO")
+    if repo_id and not os.path.exists(path):
+        try:
+            from huggingface_hub import hf_hub_download
+            hf_hub_download(
+                repo_id=repo_id,
+                filename=os.path.basename(path),
+                local_dir=os.path.dirname(path)
+            )
+            return True
+        except Exception as e:
+            print(f"HF Download failed for {path}: {e}")
+            return False
+    return os.path.exists(path)
+
+
 DASHBOARD_MODEL_OPTIONS = {
     name: path
     for name, path in MODEL_OPTIONS.items()
-    if _is_dashboard_compatible_model(path) and os.path.exists(path)
+    if _is_dashboard_compatible_model(path) and (os.path.exists(path) or os.environ.get("HF_MODEL_REPO"))
 }
 
 
@@ -256,7 +273,8 @@ def load_ser_model(path):
             custom_objects = {}
 
         if not os.path.exists(path):
-            return None, f"Model not found at `{path}`"
+            if not _download_if_missing(path):
+                return None, f"Model not found at `{path}`"
 
         model = load_model(path, custom_objects=custom_objects, compile=False)
         setattr(model, "ser_backend", "keras_feature")
@@ -271,7 +289,8 @@ def load_label_encoder():
         import joblib
 
         if not os.path.exists(ENCODER_PATH):
-            return None, f"Not found: `{ENCODER_PATH}`"
+            if not _download_if_missing(ENCODER_PATH):
+                return None, f"Not found: `{ENCODER_PATH}`"
         return joblib.load(ENCODER_PATH), None
     except Exception as exc:
         return None, str(exc)
@@ -283,7 +302,8 @@ def load_scaler():
         import joblib
 
         if not os.path.exists(SCALER_PATH):
-            return None
+            if not _download_if_missing(SCALER_PATH):
+                return None
         return joblib.load(SCALER_PATH)
     except Exception:
         return None

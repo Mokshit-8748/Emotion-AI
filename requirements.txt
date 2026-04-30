@@ -24,6 +24,7 @@ torchvision==0.16.2
 torchaudio==2.1.2
 transformers==4.36.2
 h5py==3.10.0
+huggingface-hub>=0.20.0
 
 # New additions for v3.0 dashboard
 psutil>=5.9.0
