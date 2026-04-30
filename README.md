@@ -1,3 +1,14 @@
+---
+title: Emotion AI
+emoji: 🎙️
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.31.1
+app_file: dashboard.py
+pinned: false
+---
+
 # Emotion AI
 
 Speech emotion recognition project with two main user-facing paths:
