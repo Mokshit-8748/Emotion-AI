@@ -69,6 +69,8 @@ GAN-enhanced baseline:
 python train_gan_model.py
 ```
 
+**To Try Live:**
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/Mokshit8748/Emotion-AI)
 ## Notes
 
 - **Data & Models:** Because datasets and `.pt` / `.h5` model checkpoints are very large, they are excluded from Git. To use this repo, you must place your datasets inside the `data/` directory and your pre-trained models in the `models/` directory.
